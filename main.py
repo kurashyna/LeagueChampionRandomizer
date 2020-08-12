@@ -30,25 +30,27 @@ def multi():
             i = random.randint(0,149)
         pickedNombers.append(i)
         champion = champions[i]
-        Texte = "Le Champion choisi pour le joueur " + str(n) + " est : " + champion
-        Label(multiWindow, text=Texte, font=("Arial", "11")).grid(row=n, column=0, padx=20, pady=5)
+        titleText = "Champions choisis aléatoirement pour les " + str(JoueursScale.get()) + " joueurs"
+        Texte = "Joueur " + str(n) + " doit jouer : " + champion
+        Label(multiWindow, text=titleText, font=("Times", "15")).grid(row=0, column=0, padx=20, pady=15)
+        Label(multiWindow, text=Texte, font=("Arial", "11")).grid(row=n+1, column=0, padx=20, pady=2)
         n = n+1
-        multiWindow.resizable(False,False)
+    multiWindow.resizable(False,False)
+    Button(multiWindow, text="Quitter", font=("Times","12"), command=lambda: multiWindow.destroy(), width=30).grid(row=n+2, column=0, pady=10)
 
 def askChamp():
-    
-        
     askWindow = Toplevel(mainWindow)
-    askWindow.title("LCR : T'sais on choisit un champ et hop la")
-    Label(askWindow, text="Nom du joueur: ", font=("Arial", "11")).grid(row=0, column=0)
-    Label(askWindow, text="Pick du joueur: ", font=("Arial", "11")).grid(row=0, column=2)
+    askWindow.title("LCR : Aléatoire avec champions donnés")
+    Label(askWindow, text="Nom du joueur: ", font=("Times", "12")).grid(row=1, column=0)
+    Label(askWindow, text="Pick du joueur: ", font=("Times", "12")).grid(row=1, column=1)
+    Label(askWindow, text="Aléatoire avec champions donnés", font=("Times", "18")).grid(row=0, column=0, columnspan=2)
     Pseudos = []
     Picks = []
     for y in range(JoueursScale.get()):    
-        Pseudos.append(Entry(askWindow, font=("Arial", "14"), width=15))
-        Picks.append(Entry(askWindow, font=("Arial", "14"), width=20))
-        Pseudos[y].grid(row=y+1, column=0)
-        Picks[y].grid(row=y+1, column=2)
+        Pseudos.append(Entry(askWindow, font=("Arial", "13"), width=20))
+        Picks.append(Entry(askWindow, font=("Arial", "13"), width=25))
+        Pseudos[y].grid(row=y+2, column=0)
+        Picks[y].grid(row=y+2, column=1)
         def go():
             ListePicks = []
             PickNumber = []
@@ -62,24 +64,23 @@ def askChamp():
             for i in range(JoueursScale.get()):
                 Picks[i].delete(0,100)
                 Picks[i].insert(0, ListePicks[i])
-            ButtonValider.config(text="C'est bon !")
-    def quit():
-        askWindow.destroy()
-    ButtonValider = Button(askWindow, text="Valider", font=("Arial", "11"), command=go, width=20)
-    ButtonValider.grid(row=JoueursScale.get()+1, column=1, columnspan=2)
-    Button(askWindow, text="Quitter", command=quit,font=("Arial", "10"), width=15 ).grid(row=JoueursScale.get()+1, column=0)
+            ButtonValider.config(text="Mélanger à nouveau")
+
+    ButtonValider = Button(askWindow, text="Mélanger", font=("Times", "11"), command=go, width=25)
+    ButtonValider.grid(row=JoueursScale.get()+3, pady="10", column=1)
+    Button(askWindow, text="Quitter", command=lambda: askWindow.destroy(),font=("Times", "11"), width=20 ).grid(row=JoueursScale.get()+3, column=0, pady="10")
     askWindow.resizable(False, False)
 
 mainWindow = Tk()
 mainWindow.title("League Champion Randomizer")
-Label(mainWindow, text="League Champion Randomizer", font=("Arial","16")).grid(row=0, column=0, columnspan=3)
-Label(mainWindow, text="Jusqu'à Yone", font=("Arial","8")).grid(row=1, column=0, columnspan=3)
+Label(mainWindow, text="League Champion Randomizer", font=("Times","18")).grid(row=0, column=0, columnspan=3)
+Label(mainWindow, text="Version 1.1.1 | Jusqu'à Yone", font=("Times","10")).grid(row=1, column=0, columnspan=3)
 
 NbrJoueurs = IntVar
 JoueursScale = Scale(mainWindow, variable=NbrJoueurs, orient='horizontal', from_=1, to=10, resolution=1, tickinterval=9, label="Nombre de joueurs", length=200, font=("Arial", "11"))
 JoueursScale.grid(row=2, column=0, columnspan=3)
-Button(mainWindow, text="Mode Solo", command=solo, font=("Arial", "11")).grid(row=3, column=0, pady=10, padx=10, sticky="n")
-Button(mainWindow, text="Mode Multijoueurs", command=multi, font=("Arial", "11")).grid(row=3, column=1, pady=10, sticky="n")
-Button(mainWindow, text="T'sais on choisit un champ et hop la", font=("Arial", "11"), command=askChamp).grid(row=3, column=2, pady=10, padx=10, sticky="n")
+Button(mainWindow, text="Mode Solo", command=solo, font=("Times", "12")).grid(row=3, column=0, pady=10, padx=10, sticky="n")
+Button(mainWindow, text="Mode Multijoueurs", command=multi, font=("Times", "12")).grid(row=3, column=1, pady=10, sticky="n")
+Button(mainWindow, text="Aléatoire avec champions donnés", font=("Times", "12"), command=askChamp).grid(row=3, column=2, pady=10, padx=10, sticky="n")
 mainWindow.resizable(False,False)
 mainWindow.mainloop()
