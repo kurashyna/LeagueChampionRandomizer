@@ -6,3 +6,5 @@ Vous pouvez générer un personnage aléatoirement pour vous seul ou alors pour 
 *WIP*
 # Getting Started
 *WIP*
+# Issues
+Any issues ? Free to click on this link and share your issue : https://github.com/kurashyna/LeagueChampionRandomizer/issues
