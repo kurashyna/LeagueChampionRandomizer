@@ -72,9 +72,11 @@ def askChamp():
     askWindow.resizable(False, False)
 
 mainWindow = Tk()
-mainWindow.title("League Champion Randomizer")
+mainWindow.title("League Champion Randomizer 1.2")
+#Logo = PhotoImage(file= "ressources/img/title_logo.ppm")
+#Label(mainWindow, image=Logo, width=381, height=26).grid(columnspan=3)
 Label(mainWindow, text="League Champion Randomizer", font=("Times","18")).grid(row=0, column=0, columnspan=3)
-Label(mainWindow, text="Version 1.1.1 | Jusqu'à Yone", font=("Times","10")).grid(row=1, column=0, columnspan=3)
+Label(mainWindow, text="Version 1.2 | Jusqu'à Yone", font=("Times","10")).grid(row=1, column=0, columnspan=3)
 
 NbrJoueurs = IntVar
 JoueursScale = Scale(mainWindow, variable=NbrJoueurs, orient='horizontal', from_=1, to=10, resolution=1, tickinterval=9, label="Nombre de joueurs", length=200, font=("Arial", "11"))
